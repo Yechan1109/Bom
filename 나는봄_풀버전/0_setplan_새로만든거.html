@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>나는봄</title>
+    <link rel="stylesheet" href="main.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script> 
+    $(document).ready(function(){$(".flip").click(function(){$(".panel").slideToggle("slow");});});
+    </script>
+</head>
+<body>
+
+<div id="main">
+
+  <div>내담자 이름 : <input name='ctname' type='text' required /></div>
+
+        <div class="tab-container wrap">
+          
+          <h2>사례지원 계획</h2>
+            <div class="tab-btn-pannel">
+              <button class="tab-btn tab-Active" onclick="opentab(event,'Tab1')">의료지원</button>
+              <button class="tab-btn" onclick="opentab(event,'Tab2')">심리지원</button>
+              <button class="tab-btn" onclick="opentab(event,'Tab3')">사례관리</button>
+            </div>
+            
+            <div id="Tab1" class="tab-content tab">
+              <h2>의료지원</h2>
+              <p>의료지원 테스트</p>
+
+
+            </div>
+          
+            <div id="Tab2" class="tab-content tab" style="display:none">
+              <h2>심리지원</h2>
+              <p>심리지원 테스트</p>
+
+            </div>
+
+            <div id="Tab3" class="tab-content tab" style="display:none">
+                <h2>사례관리</h2>
+            </div>
+
+</div>
+
+<p id="demo" ></p>
+
+
+<script>
+var setplan = {
+    "의료지원" :{
+                "날짜":{"시작일":"","종료일":""},
+  
+                "진료":{
+                      "치과"       :{"월 빈도": 0, "총 빈도":0, "내용":" "},
+                      "여성의학과" :{"월 빈도": 0, "총 빈도":0, "내용":" "},
+                      "한방의학과" :{"월 빈도": 0, "총 빈도":0, "내용":" "},
+                      "가정의학과" :{"월 빈도": 0, "총 빈도":0, "내용":" "}},
+  
+                "각종검사": {
+                      "여성의학과 검사" :{"여부체크": null, "내용":" "},
+                      "기초검사"       :{"여부체크": null, "내용":" "},
+                      "항체검사"       :{"여부체크": null, "내용":" "},
+                      "기타"           :{"이름":"", "내용":""}},
+                  
+                "약지급":{
+                      "치료제":{"이름":" ","월 빈도": 0, "총 빈도":0, "내용":" "},
+                      "영양제":{"이름":" ","월 빈도": 0, "총 빈도":0, "내용":" "},
+                      "기타1" :{"이름":" ", "월 빈도": 0, "총 빈도":0, "내용":" "},
+                      "기타2" :{"이름":" ", "월 빈도": 0, "총 빈도":0, "내용":" "},
+                      "기타3" :{"이름":" ", "월 빈도": 0, "총 빈도":0, "내용":" "}},
+                
+                "예방접종":{
+                      "간염예방접종"       : {"차수":0, "내용":""},
+                      "자궁경부암예방접종"  : {"차수":0, "내용":""},
+                      "독감예방접종"       : {"내용":""},
+                      "기타 1" : {"이름":" ", "총 빈도": 0, "내용":" "},
+                      "기타 2" : {"이름":" ", "총 빈도": 0, "내용":" "},
+                      "기타 3" : {"이름":" ", "총 빈도": 0, "내용":" "}},
+  
+                  "외부병원" : {
+                      "치과"       :{"월 빈도": 0, "총 빈도":0, "내용":" "},
+                      "여성의학과" :{"월 빈도": 0, "총 빈도":0, "내용":" "},
+                      "기타"       :{"이름":" ","월 빈도": 0, "총 빈도":0, "내용":" "}},
+                      
+                  "예방의학":{
+                      "잇솔질교육":{"월 빈도": 0, "총 빈도":0, "내용":" "},
+                      "안경지원"  :{"월 빈도": 0, "총 빈도":0, "내용":" "},
+                      "몸펴기운동":{"월 빈도": 0, "총 빈도":0, "내용":" "},
+                      "기타"     :{"이름":" ","월 빈도": 0, "총 빈도": 0, "내용":" "}}
+                },
+    "심리지원" : {
+                  "날짜":{"시작일":"","종료일":""},
+                
+                  "정신보건상담" : {
+                      "대면":{"월 빈도": 0, "총 빈도":0, "내용":" "},
+                      "전화":{"월 빈도": 0, "총 빈도":0, "내용":" "}},
+  
+                  "심리검사" : {
+                      "종합심리검사":{"총 빈도" : 0},
+                      "기타":{"이름":"","총 빈도" : 0}},
+  
+                  "심리정서지원/프로그램" : {
+                      "원예치료":{"월 빈도": 0, "총 빈도":0, "내용":" "},
+                      "몸치료"  :{"월 빈도": 0, "총 빈도":0, "내용":" "},
+                      "기타":{"이름":" ","월 빈도": 0, "총 빈도": 0, "내용":" "}}
+              },
+    "사례지원" : {
+                  "날짜":{"시작일":"","종료일":""},
+  
+                  "상담":{
+                        "대면":{"월 빈도": 0, "총 빈도":0, "내용":" "},
+                        "심층":{"월 빈도": 0, "총 빈도":0, "내용":" "},
+                        "전화":{"월 빈도": 0, "총 빈도":0, "내용":" "},
+                        "SNS":{"월 빈도": 0, "총 빈도":0, "내용":" "}},
+  
+                  "1:1교육":{
+                      "성건강":{"월 빈도": 0, "총 빈도":0, "내용":" "},
+                      "관계"  :{"월 빈도": 0, "총 빈도":0, "내용":" "},
+                      "기타"  :{"이름":" ","월 빈도": 0, "총 빈도": 0, "내용":" "}},
+  
+                  "기초생활지원":{
+                      "먹거리"  :{"월 빈도": 0, "총 빈도":0, "내용":" "},
+                      "물품"    :{"월 빈도": 0, "총 빈도":0, "내용":" "},
+                      "교통비"  :{"월 빈도": 0, "총 빈도":0, "내용":" "},
+                      "자원연계":{"월 빈도": 0, "총 빈도":0, "내용":" "}}
+            }
+  }
+
+var front = '\
+<div class="tab-container wrap">\
+<h2>사례지원 계획</h2>\
+<div class="tab-btn-pannel">'
+
+var keys1 = Object.keys(setplan)
+
+
+console.log(keys1)
+for (var i=0; i<keys1.length; i++){
+  var tab_Active;
+  if (i==0){tab_Active="tab-Active"}else{tab_Active=""}
+  front+=`<button class="tab-btn ${tab_Active}" onclick="opentab(event,"Tab'${i+1}")">${keys1[i]}</button>`}
+
+
+front= front + "</div></div>"
+
+console.log(front)
+// document.write(front)
+document.getElementById("demo").innerHTML = front;
+
+</script>
+
+
+
+<!-- 탭 기능 -->
+<script>
+
+
+  function opentab(evt, tabName) {
+    var i, x, tabBtns;
+    x = document.getElementsByClassName("tab");
+    for (i = 0; i < x.length; i++) {x[i].style.display = "none";}
+    tabBtns = document.getElementsByClassName("tab-btn");
+    for (i = 0; i < x.length; i++) {tabBtns[i].className = tabBtns[i].className.replace(" tab-Active", "");}
+    document.getElementById(tabName).style.display = "block";
+    evt.currentTarget.className += " tab-Active";
+  }
+
+
+</script>
+
+<!-- 입력 서식 붙여넣기 -->
+<script>
+function inputs(name,code){
+    var name = '치과';
+    var code = "A1";
+    var tag = '\
+          <table>\
+            <tr><td>- 월 빈도 : 월 <input type="text" name="medical_'+code+'_MF" style="width:40px;">회 </td></tr>\
+            <tr><td>- 총 빈도 : 총 <input type="text" name="medical_'+code+'_TF" style="width:40px;">회 </td></tr>\
+            <tr><td>- 내용 입력 : </td></tr>\
+            <tr><td><textarea cols="20" rows="5" name="medical_'+code+'_Text" placeholder="text.."></textarea></td></tr>\
+          </table>\
+          ';
+        
+  var tags = document.getElementsByClassName( "data_input" ); 
+  for ( var i = 0; i < tags.length; i++ ){ tags[ i ].innerHTML = text; 	} 
+   } 
+ 
+  
+</script>
+
+</body>
+</html>

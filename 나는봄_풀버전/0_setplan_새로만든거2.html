@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>나는봄</title>
+    <link rel="stylesheet" href="main.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script> 
+    $(document).ready(function(){$(".flip").click(function(){$(".panel").slideToggle("slow");});});
+    </script>
+    
+</head>
+<body>
+
+<div id="main">
+
+  <div>내담자 이름 : <input name='ctname' type='text' required /></div>
+
+        <div class="tab-container wrap">
+          
+          <h2>사례지원 계획</h2>
+            <div class="tab-btn-pannel">
+              <button class="tab-btn tab-Active" onclick="opentab(event,'Tab1')">의료지원</button>
+              <button class="tab-btn" onclick="opentab(event,'Tab2')">심리지원</button>
+              <button class="tab-btn" onclick="opentab(event,'Tab3')">사례관리</button>
+            </div>
+            
+            <div id="Tab1" class="tab-content tab">
+              <h2>의료지원</h2>
+              
+                    <tr>
+                        <td>
+                            <table>
+                                <tr>
+                                                <td>
+                                                    <table border="1">
+                                                        <tr>
+                                                            <td>시작일 : <input name='medical_start' type="date" value='{{bomsetplan.medical_start}}' style="width:120px;"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>종료일 : <input name='medical_end' type="date" value='{{bomsetplan.medical_end}}' style="width:120px;"></td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                <tr class="parent" id="medical_1">
+                                    <td rowspan="2">진료</td>
+                                </tr>
+                                <tr class="child-medical_1">
+                                    <td>
+                                        <table>
+
+                                            <tr>
+                                                <td>치과</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <table>
+                                                        <tr>
+                                                            <td>- 월 빈도 : 월 <input type="text" name='medical_A1_MF' style="width:40px;">회 </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>- 총 빈도 : 총 <input type="text" name='medical_A1_TF' style="width:40px;">회 </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>- 내용 입력 : </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><textarea cols='20' rows="5" name='medical_A1_Text' placeholder="text.."></textarea></td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>여성의학과</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <table>
+                                                        <tr>
+                                                            <td>- 월 빈도 : 월 <input type="text" name='medical_A2_MF' style="width:40px;">회 </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>- 총 빈도 : 총 <input type="text" name='medical_A2_TF' style="width:40px;">회 </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>- 내용 입력 : </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><textarea cols='20' rows="5" name='medical_A2_Text' placeholder="text.."></textarea></td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>한방의학과</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <table>
+                                                        <tr>
+                                                            <td>- 월 빈도 : 월 <input type="text" name='medical_A3_MF' style="width:40px;">회 </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>- 총 빈도 : 총 <input type="text" name='medical_A3_TF' style="width:40px;">회 </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>- 내용 입력 : </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><textarea cols='20' rows="5" name='medical_A3_Text' placeholder="text.."></textarea></td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>가정의학과</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <table>
+                                                        <tr>
+                                                            <td>- 월 빈도 : 월 <input type="text" name='medical_A4_MF' style="width:40px;">회 </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>- 총 빈도 : 총 <input type="text" name='medical_A4_TF' style="width:40px;">회 </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>- 내용 입력 : </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><textarea cols='20' rows="5" name='medical_A4_Text' placeholder="text.."></textarea></td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr><td></td></tr>
+                                <tr class="parent" id="medical_2">
+                                    <td rowspan="2">각종검사</td>
+                                </tr>
+                                <tr class="child-medical_2">
+                                    <td>
+                                        <table>
+
+                                            <tr>
+                                                <td>여성의학과 검사</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <table>
+                                                        <td>- 여부체크:
+                                                <input type="checkbox" name='medical_B1_YN' style="width:15px; height:15px;" >Yes
+                                            </td>
+                                                        <tr>
+                                                            <td>- 내용 입력 : </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><textarea cols='30' rows="5" name='medical_B1_Text' placeholder="text.."></textarea></td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>기초검사</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <table>
+                                                        <td>- 여부체크:
+                                                <input type="checkbox" name='medical_B2_YN' style="width:15px; height:15px;" >Yes
+                                            </td>
+                                                        <tr>
+                                                            <td>- 내용 입력 : </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><textarea cols='30' rows="5" name='medical_B2_Text' placeholder="text.."></textarea></td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>항체검사</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <table>
+                                                        <td>- 여부체크:
+                                                <input type="checkbox" name='medical_B3_YN' style="width:15px; height:15px;" >Yes
+                                            </td>
+                                                        <tr>
+                                                            <td>- 내용 입력 : </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><textarea cols='30' rows="5" name='medical_B3_Text' placeholder="text.."></textarea></td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>기타</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <table>
+                                                        <tr>
+                                                            <td>- 내용 : <input type="text" name='medical_B4_Name' placeholder="이름.." style="width:150px;"></td>
+                                                        </tr>
+                                                        <td>- 여부체크:
+                                                            <input type="checkbox" name='medical_B4_YN' style="width:15px; height:15px;" >Yes
+                                                        </td>
+                                                        <tr>
+                                                            <td>- 내용 입력 : </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><textarea cols='30' rows="5" name='medical_B4_Text' placeholder="text.."></textarea></td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr><td></td></tr>
+                                <tr class="parent" id="medical_3">
+                                    <td rowspan="2">약지급</td>
+                                </tr>
+                                <tr class="child-medical_3">
+                                    <td>
+                                        <table>
+
+                                            <tr>
+                                                <td>치료제</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <table>
+                                                        <tr>
+                                                            <td>- 월 빈도 : 월 <input type="text" name='medical_C1_MF' style="width:40px;">회 </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>- 총 빈도 : 총 <input type="text" name='medical_C1_TF' style="width:40px;">회 </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>- 내용 입력 : </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><textarea cols='20' rows="5" name='medical_C1_Text' placeholder="text.."></textarea></td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>영양제</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <table>
+                                                        <tr>
+                                                            <td>- 월 빈도 : 월 <input type="text" name='medical_C2_MF' style="width:40px;">회 </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>- 총 빈도 : 총 <input type="text" name='medical_C2_TF' style="width:40px;">회 </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>- 내용 입력 : </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><textarea cols='20' rows="5" name='medical_C2_Text' placeholder="text.."></textarea></td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>임신테스트기</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <table>
+                                                        <tr>
+                                                            <td>- 월 빈도 : 월 <input type="text" name='medical_C3_MF' style="width:40px;">회 </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>- 총 빈도 : 총 <input type="text" name='medical_C3_TF' style="width:40px;">회 </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>- 내용 입력 : </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><textarea cols='20' rows="5" name='medical_C3_Text' placeholder="text.."></textarea></td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>기타 1</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <table>
+                                                        <tr>
+                                                            <td>- 내용 : <input type="text" name='medical_C4_Name' placeholder="약이름.." style="width:150px;"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>- 월 빈도 : 월 <input type="text" name='medical_C4_MF' style="width:40px;">회 </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>- 총 빈도 : 총 <input type="text" name='medical_C4_TF' style="width:40px;">회 </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>- 내용 입력 : </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><textarea cols='20' rows="5" name='medical_C4_Text' placeholder="text.."></textarea></td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>기타 2</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <table>
+                                                        <tr>
+                                                            <td>- 내용 : <input type="text" name='medical_C5_Name' placeholder="약이름.." style="width:150px;"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>- 월 빈도 : 월 <input type="text" name='medical_C5_MF' style="width:40px;">회 </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>- 총 빈도 : 총 <input type="text" name='medical_C5_TF' style="width:40px;">회 </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>- 내용 입력 : </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><textarea cols='20' rows="5" name='medical_C5_Text' placeholder="text.."></textarea></td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr><td></td></tr>
+                                <tr class="parent" id="medical_4">
+                                    <td rowspan="2">예방접종</td>
+                                </tr>
+                                <tr class="child-medical_4">
+                                    <td>
+                                        <table>
+
+                                            <tr>
+                                                <td>간염예방접종</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <table>
+                                                        <tr>
+                                                            <td>- 차 수 :  <input type="text" name='medical_D1_Num' style="width:40px;" placeholder="몇">차까지..</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>- 내용 입력 : </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><textarea cols='20' rows="5" name='medical_D1_Text' placeholder="text.."></textarea></td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>자궁경부암예방접종</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <table>
+                                                        <tr>
+                                                            <td>- 차 수 :  <input type="text" name='medical_D2_Num' style="width:40px;" placeholder="몇">차까지..</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>- 내용 입력 : </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><textarea cols='20' rows="5" name='medical_D2_Text' placeholder="text.."></textarea></td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>독감예방접종</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <table>
+                                                        <td>- 여부체크:
+                                                            <input type="checkbox" name='medical_D3_YN' style="width:15px; height:15px;" >Yes
+                                                        </td>
+                                                        <tr>
+                                                            <td>- 내용 입력 : </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><textarea cols='20' rows="5" name='medical_D3_Text' placeholder="text.."></textarea></td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>기타 1</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <table>
+                                                        <tr>
+                                                            <td>- 내용 : <input type="text" name='medical_D4_Name' placeholder="이름.." style="width:150px;"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>- 총 빈도 : 총 <input type="text" name='medical_D4_TF' style="width:40px;">회 </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>- 내용 입력 : </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><textarea cols='20' rows="5" name='medical_D4_Text' placeholder="text.."></textarea></td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>기타 2</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <table>
+                                                        <tr>
+                                                            <td>- 내용 : <input type="text" name='medical_D5_Name' placeholder="이름.." style="width:150px;"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>- 총 빈도 : 총 <input type="text" name='medical_D5_TF' style="width:40px;">회 </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>- 내용 입력 : </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><textarea cols='20' rows="5" name='medical_D5_Text' placeholder="text.."></textarea></td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>기타 3</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <table>
+                                                        <tr>
+                                                            <td>- 내용 : <input type="text" name='medical_D6_Name' placeholder="이름.." style="width:150px;"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>- 총 빈도 : 총 <input type="text" name='medical_D6_TF' style="width:40px;">회 </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>- 내용 입력 : </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><textarea cols='20' rows="5" name='medical_D6_Text' placeholder="text.."></textarea></td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr><td></td></tr>
+
+                                <tr class="parent" id="medical_5">
+                                    <td rowspan="2">외부병원</td>
+                                </tr>
+                                <tr class="child-medical_5">
+                                    <td>
+                                        <table>
+
+                                            <tr>
+                                                <td>치과</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <table>
+                                                        <tr>
+                                                            <td>- 월 빈도 : 월 <input type="text" name='medical_E1_MF' style="width:40px;">회 </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>- 총 빈도 : 총 <input type="text" name='medical_E1_TF' style="width:40px;">회 </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>- 내용 입력 : </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><textarea cols='20' rows="5" name='medical_E1_Text' placeholder="text.."></textarea></td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr class="parent" id="medical_5-2">
+                                                <td>여성의학과</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <table>
+                                                        <tr>
+                                                            <td>- 월 빈도 : 월 <input type="text" name='medical_E2_MF' style="width:40px;">회 </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>- 총 빈도 : 총 <input type="text" name='medical_E2_TF' style="width:40px;">회 </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>- 내용 입력 : </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><textarea cols='20' rows="5" name='medical_E2_Text' placeholder="text.."></textarea></td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr class="parent" id="medical_5-3">
+                                                <td>기타</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <table>
+                                                        <tr>
+                                                            <td>- 내용 : <input type="text" name='medical_E3_Name' placeholder="이름.." style="width:150px;"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>- 월 빈도 : 월 <input type="text" name='medical_E3_MF' style="width:40px;">회 </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>- 총 빈도 : 총 <input type="text" name='medical_E3_TF' style="width:40px;">회 </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>- 내용 입력 : </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><textarea cols='20' rows="5" name='medical_E3_Text' placeholder="text.."></textarea></td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr><td></td></tr>
+
+                                <tr class="parent" id="medical_6">
+                                    <td rowspan="2">예방의학</td>
+                                </tr>
+                                <tr class="child-medical_6">
+                                    <td>
+                                        <table>
+
+                                            <tr class="parent" id="medical_6-1">
+                                                <td>잇솔질교육</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <table>
+                                                        <tr>
+                                                            <td>- 월 빈도 : 월 <input type="text" name='medical_F1_MF' style="width:40px;">회 </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>- 총 빈도 : 총 <input type="text" name='medical_F1_TF' style="width:40px;">회 </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>- 내용 입력 : </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><textarea cols='20' rows="5" name='medical_F1_Text' placeholder="text.."></textarea></td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr class="parent" id="medical_6-2">
+                                                <td>안경지원</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <table>
+                                                        <tr>
+                                                            <td>- 월 빈도 : 월 <input type="text" name='medical_F2_MF' style="width:40px;">회 </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>- 총 빈도 : 총 <input type="text" name='medical_F2_TF' style="width:40px;">회 </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>- 내용 입력 : </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><textarea cols='20' rows="5" name='medical_F2_Text' placeholder="text.."></textarea></td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr class="parent" id="medical_6-3">
+                                                <td>몸펴기운동</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <table>
+                                                        <tr>
+                                                            <td>- 월 빈도 : 월 <input type="text" name='medical_F3_MF' style="width:40px;">회 </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>- 총 빈도 : 총 <input type="text" name='medical_F31_TF' style="width:40px;">회 </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>- 내용 입력 : </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><textarea cols='20' rows="5" name='medical_F3_Text' placeholder="text.."></textarea></td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr class="parent" id="medical_6-4">
+                                                <td>기타</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <table>
+                                                        <tr>
+                                                            <td>- 내용 : <input type="text" name='medical_F4_Name' placeholder="이름.." style="width:150px;"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>- 월 빈도 : 월 <input type="text" name='medical_F4_MF' style="width:40px;">회 </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>- 총 빈도 : 총 <input type="text" name='medical_F41_TF' style="width:40px;">회 </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>- 내용 입력 : </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><textarea cols='20' rows="5" name='medical_F4_Text' placeholder="text.."></textarea></td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+            
+
+
+            </div>
+          
+            <div id="Tab2" class="tab-content tab" style="display:none">
+              <h2>심리지원</h2>
+              <div>
+              <button class="tab-btn" onclick="opentab(event,'Tab4')">정신보건상담</button>
+              <button class="tab-btn" onclick="opentab(event,'Tab4')">심리검사</button>
+              <button class="tab-btn" onclick="opentab(event,'Tab4')">심리정서지원 프로그램</button>
+              </div>
+              <div id="Tab4" class="tab-content">
+              <h2>정신보건상담</h2>
+              </div>
+              
+            </div>
+
+            <div id="Tab3" class="tab-content tab" style="display:none">
+                <h2>사례관리</h2>
+                <tr>
+                        <td>
+                            <table>
+                                <tr>
+                                                <td>
+                                                    <table border="1">
+                                                        <tr>
+                                                            <td>시작일 : <input type="date" name='case_start'value='{{bomsetplan.case_start}}' style="width:120px;"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>종료일 : <input type="date" name='case_end'value='{{bomsetplan.case_end}}' style="width:120px;"></td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                <tr class="parent" id="case_1">
+                                    <td rowspan="2">상담</td>
+                                </tr>
+                                <tr class="child-case_1">
+                                    <td>
+                                        <table>
+                                            <tr class="parent" id="case_1-1">
+                                                <td>대면</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <table>
+                                                        <tr>
+                                                            <td>- 월 빈도 : 월 <input type="text" name='case_A1_MF' style="width:40px;">회 </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>- 총 빈도 : 총 <input type="text" name='case_A1_TF' style="width:40px;">회 </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>- 내용 입력 : </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><textarea cols='30' rows="5" name='case_A1_Text' placeholder="text.."></textarea></td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr class="parent" id="case_1-2">
+                                                <td>심층</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <table>
+                                                       <tr>
+                                                            <td>- 월 빈도 : 월 <input type="text" name='case_A2_MF' style="width:40px;">회 </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>- 총 빈도 : 총 <input type="text" name='case_A2_TF' style="width:40px;">회 </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>- 내용 입력 : </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><textarea cols='30' rows="5" name='case_A2_Text' placeholder="text.."></textarea></td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr class="parent" id="case_1-3">
+                                                <td>전화</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <table>
+                                                        <tr>
+                                                            <td>- 월 빈도 : 월 <input type="text" name='case_A3_MF' style="width:40px;">회 </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>- 총 빈도 : 총 <input type="text" name='case_A3_TF' style="width:40px;">회 </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>- 내용 입력 : </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><textarea cols='30' rows="5" name='case_A3_Text' placeholder="text.."></textarea></td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr class="parent" id="case_1-4">
+                                                <td>SNS</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <table>
+                                                        <tr>
+                                                            <td>- 월 빈도 : 월 <input type="text" name='case_A4_MF' style="width:40px;">회 </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>- 총 빈도 : 총 <input type="text" name='case_A4_TF' style="width:40px;">회 </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>- 내용 입력 : </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><textarea cols='30' rows="5" name='case_A4_Text' placeholder="text.."></textarea></td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr><td></td></tr>
+
+                                <tr class="parent" id="case_2">
+                                    <td rowspan="2">1:1 교육</td>
+                                </tr>
+                                <tr class="child-case_2">
+                                    <td>
+                                        <table>
+                                            <tr class="parent" id="case_2-1">
+                                                <td>성건강</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <table>
+                                                        <tr>
+                                                            <td>- 월 빈도 : 월 <input type="text" name='case_B1_MF' style="width:40px;">회 </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>- 총 빈도 : 총 <input type="text" name='case_B1_TF' style="width:40px;">회 </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>- 내용 입력 : </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><textarea cols='30' rows="5" name='case_B1_Text' placeholder="text.."></textarea></td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr class="parent" id="case_2-2">
+                                                <td>관계</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <table>
+                                                        <tr>
+                                                            <td>- 월 빈도 : 월 <input type="text" name='case_B2_MF' style="width:40px;">회 </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>- 총 빈도 : 총 <input type="text" name='case_B2_TF' style="width:40px;">회 </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>- 내용 입력 : </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><textarea cols='30' rows="5" name='case_B2_Text' placeholder="text.."></textarea></td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr class="parent" id="case_2-3">
+                                                <td>기타</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <table>
+                                                        <tr>
+                                                            <td>- 내용 : <input type="text" name='case_B3_Name' placeholder="이름.." style="width:150px;"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>- 월 빈도 : 월 <input type="text" name='case_B3_MF' style="width:40px;">회 </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>- 총 빈도 : 총 <input type="text" name='case_B31_TF' style="width:40px;">회 </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>- 내용 입력 : </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><textarea cols='30' rows="5" name='case_B3_Text' placeholder="text.."></textarea></td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr><td></td></tr>
+
+                                <tr class="parent" id="case_3">
+                                    <td rowspan="2">기초생활지원</td>
+                                </tr>
+                                <tr class="child-case_3">
+                                    <td>
+                                        <table>
+                                            <tr class="parent" id="case_3-1">
+                                                <td>먹거리</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <table>
+                                                        <tr>
+                                                            <td>- 월 빈도 : 월 <input type="text" name='case_C1_MF' style="width:40px;">회 </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>- 총 빈도 : 총 <input type="text" name='case_C1_TF' style="width:40px;">회 </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>- 내용 입력 : </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><textarea cols='30' rows="5" name='case_C1_Text' placeholder="text.."></textarea></td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr class="parent" id="case_3-2">
+                                                <td>물품</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <table>
+                                                        <tr>
+                                                            <td>- 월 빈도 : 월 <input type="text" name='case_C2_MF' style="width:40px;">회 </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>- 총 빈도 : 총 <input type="text" name='case_C2_TF' style="width:40px;">회 </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>- 내용 입력 : </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><textarea cols='30' rows="5" name='case_C2_Text' placeholder="text.."></textarea></td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr class="parent" id="case_3-3">
+                                                <td>교통비</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <table>
+                                                        <tr>
+                                                            <td>- 월 빈도 : 월 <input type="text" name='case_C3_MF' style="width:40px;">회 </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>- 총 빈도 : 총 <input type="text" name='case_C3_TF' style="width:40px;">회 </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>- 내용 입력 : </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><textarea cols='30' rows="5" name='case_C3_Text' placeholder="text.."></textarea></td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr class="parent" id="case_3-4">
+                                                <td>자원연계</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <table>
+                                                        <tr>
+                                                            <td>- 월 빈도 : 월 <input type="text" name='case_C4_MF' style="width:40px;">회 </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>- 총 빈도 : 총 <input type="text" name='case_C4_TF' style="width:40px;">회 </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>- 내용 입력 : </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><textarea cols='30' rows="5" name='case_C4_Text' placeholder="text.."></textarea></td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr><td></td></tr>
+                            </table>
+                        </td>
+                    </tr>
+            </div>
+
+        </div>
+
+</div>
+
+
+
+
+
+
+<!-- 탭 기능 -->
+<script>
+  function opentab(evt, tabName) {
+    var i, x, tabBtns;
+    x = document.getElementsByClassName("tab");
+    for (i = 0; i < x.length; i++) {x[i].style.display = "none";}
+    tabBtns = document.getElementsByClassName("tab-btn");
+    for (i = 0; i < x.length; i++) {tabBtns[i].className = tabBtns[i].className.replace(" tab-Active", "");}
+    document.getElementById(tabName).style.display = "block";
+    evt.currentTarget.className += " tab-Active";
+  }
+</script>
+<script>
+    $('tr.parent')
+        .css("cursor", "pointer")
+        .attr("title", "Click to expand/collapse")
+        .click(function () {
+        $(this).siblings('.child-' + this.id).toggle();
+    });
+    $('tr[class*=child-]').hide().children('td');
+</script>
+</body>
+</html>
