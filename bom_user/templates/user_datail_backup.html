@@ -1,0 +1,325 @@
+<html>
+
+<head lang='ko'>
+
+<script src='https://code.jquery.com/jquery-3.3.1.js'></script>
+<script src='https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js'></script>
+
+<link rel='stylesheet' href='https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css'>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script>
+$(document).ready(function() {
+    $('#example').DataTable( {
+        "scrollX": true
+    } );
+} );
+</script>
+
+<style>
+div.dataTables_wrapper {
+        width: 90%;
+        margin: 0 auto;
+    }
+
+
+
+</style>
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+  <a class="navbar-brand" href="{% url 'index' %}">나는봄</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarCollapse">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'main' %}">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'initial' %}">초기상담</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'setplan' %}">사례지원계획</a>
+      </li>
+       <li class="nav-item">
+        <a class="nav-link" href="{% url 'danger_cf' %}">위기분류</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'getplan' %}">사례지원진행</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'perfor' %}">실적등록</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'user_data' %}">Data</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">통계</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">실적보고</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'toadmin' %}">관리자</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'logout' %}">로그아웃</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
+<br><br><br><br>
+
+<form method='POST'>
+{% csrf_token %}
+<div id='main'>
+
+<br><br>
+
+<table border=1 cellspacing="0">
+
+<tr> 
+ <th colspan="10"> 개인인적사항</th>
+</tr>
+<tr>
+    <td style='font-weight:bold;'>이름</td>
+    <td>{{ user.C_Name}}</td>
+    <td style='font-weight:bold;'>성별</td>
+    <td>{{ user.C_Gender}}</td>
+    <td style='font-weight:bold;'>주민등록번호</td>
+    <td>{{ user.C_Jumin}}</td>
+</tr>
+<tr>
+    <td style='font-weight:bold;'>등록일</td>
+    <td colspan='2'>{{ user.REG_Day }}</td>
+    <td style='font-weight:bold;'>의뢰기관</td>
+    <td colspan='4'>{{ user.C_Institute }}</td>
+</tr>
+
+<tr> 
+ <th colspan="10"> 지원계획 현황 </th>
+</tr>
+
+<tr>
+ 
+ <th rowspan="10" style='background-color:#a1ffd3'> 의료지원 </th>
+ <th colspan='2'> 분류 </th>
+ <th colspan='2' style='width:350px;'> 진행 상황 </th>
+ <th colspan='1' style='width:75px;'> 비용 </th>
+ 
+</tr>
+
+<tr>
+ <td colspan='2'> 치과 </td>
+ <td colspan='1'> 1회 / 3회</td>
+ <td colspan='1'></td>
+ <td colspan='1'>20000</td>
+
+
+</tr>
+
+<tr> 
+ <td colspan='2'> 여성의학과 </td>
+ <td colspan='1'> 0회 / 0회 </td>
+ <td colspan='1'></td>
+ <td colspan='1'></td>
+</tr>
+<tr> 
+ <td colspan='2'> 한방의학과 </td>
+ <td colspan='1'> 0회 / 0회</td>
+ <td colspan='1'></td>
+ <td colspan='1'></td>
+</tr>
+<tr> 
+ <td colspan='2'> 가정의학과 </td>
+ <td colspan='1'> 0회 / 0회</td>
+ <td colspan='1'></td>
+ <td colspan='1'></td>
+</tr>
+<tr> 
+ <td colspan='2'> 각종검사 </td>
+ <td colspan='1'> 1회 / 3회</td>
+ <td colspan='1'>기초(1/1), 항체(0/2)</td>
+ <td colspan='1'></td>
+</tr>
+<tr> 
+ <td colspan='2'> 약지급 </td>
+ <td colspan='1'> 1회 / 5회</td>
+ <td colspan='1'>치료제(1/3), 영양제(0/2)</td>
+ <td colspan='1'></td>
+</tr>
+<tr> 
+ <td colspan='2'> 예방접종 </td>
+ <td colspan='1'> 0회 / 2회</td>
+ <td colspan='1'>독감(0/1), 자궁경부암(0/1)</td>
+ <td colspan='1'></td>
+</tr>
+<tr> 
+ <td colspan='2'> 외부병원 </td>
+ <td colspan='1'> 0회 / 1회</td>
+ <td colspan='1'>치과(0/1)</td>
+ <td colspan='1'></td>
+</tr>
+<tr> 
+ <td colspan='2'> 예방의학 </td>
+ <td colspan='1'> 0회 / 0회</td>
+ <td colspan='1'></td>
+ <td colspan='1'></td>
+</tr>
+
+<tr>
+ <td rowspan='3' style='background-color:#fac49d'> 심리지원 </td>
+ <td colspan='2'> 정신보건상담 </td>
+ <td colspan='1'> 0회 / 0회</td>
+ <td colspan='1'></td>
+ <td colspan='1'></td>
+</tr>
+<tr> 
+ <td colspan='2'> 심리검사 </td>
+ <td colspan='1'> 0회 / 0회</td>
+ <td colspan='1'></td>
+ <td colspan='1'></td>
+</tr>
+<tr> 
+ <td colspan='2'> 심리정서지원 프로그램 </td>
+ <td colspan='1'> 0회 / 0회</td>
+ <td colspan='1'></td>
+ <td colspan='1'></td>
+</tr>
+
+<tr>
+ <td rowspan='3' style='background-color:#b5e0f7'> 사례관리 </td>
+ <td colspan='2'> 상담 </td>
+ <td colspan='1'> 0회 / 0회</td>
+ <td colspan='1'></td>
+ <td colspan='1'></td>
+</tr>
+<tr> 
+ <td colspan='2'> 1:1 교육 </td>
+ <td colspan='1'> 0회 / 0회</td>
+ <td colspan='1'></td>
+ <td colspan='1'></td>
+</tr>
+<tr> 
+ <td colspan='2'> 기초생활지원 </td>
+ <td colspan='1'> 2회 / 5회</td>
+ <td colspan='1'>먹거리(1/2), 물품(0/1), 교통(1/2)</td>
+ <td colspan='1'></td>
+</tr>
+
+
+
+
+
+<tr>
+ <th colspan="7"> 위기분류 변화 </th>
+</tr>
+
+<tr>
+ <td> 2020.01.01 </td>
+ <td> 1차 </td>
+ <td colspan='5'> 51 점 </td>
+ 
+</tr>
+
+<tr>
+ <td> 2020.01.15 </td>
+ <td> 2차 </td>
+ <td colspan='5'> 35 점 </td>
+ 
+</tr>
+
+<tr>
+ <td> -</td>
+ <td> 3차 </td>
+ <td colspan='5'> 미입력 </td>
+ 
+</tr>
+
+
+<tr>
+ <th colspan="7"> 상담내역 </th>
+</tr>
+
+<tr>
+ <td colspan='2'> 2020.01.22 </td>
+ <td colspan='5'> SNS </td>
+ 
+</tr>
+
+<tr>
+ <td colspan='2'> 2020.01.25 </td>
+ <td colspan='5'> 전화 </td>
+</tr>
+
+<tr>
+ <td colspan='2'> 2020.01.26 </td>
+ <td colspan='5'> 대면 </td>
+</tr>
+
+<tr>
+ <td colspan='2'> 2020.02.01 </td>
+ <td colspan='5'> 대면 </td>
+</tr>
+
+
+<tr>
+ <th colspan="7"><button>Comments:</button></th>
+</tr>
+
+<tr>
+ <td colspan='7'>2020.01.22 : 특이사항 없음.</td>
+ 
+ 
+</tr>
+
+<tr>
+ <td colspan='7'>2020.01.25 : 물품지원 요청함.</td>
+ 
+</tr>
+
+</table>
+{% comment %} {% endif %} {% endcomment %}
+ 
+<div>
+
+
+</form>
+
+{% comment %} <table id="example" class="display nowrap" style="width:100%">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>이름</th>
+            <th>주민</th>
+            <th>성별</th>
+            <th>상담자</th>
+            <th>등록일</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th> {{ user.id }}</th>
+            <th>{{ user.C_Name }}</th>
+            <th>{{ user.C_Jumin }}</th>
+            <th>{{ user.C_Gender }}</th>
+            <th>{{ user.F_Coun }}</th>
+            <th>{{ user.REG_Day }}</th>
+        </tr>
+    </tbody>
+</table> {% endcomment %}
+
+<a href="/userlist/">뒤로 가기</a>
+
+
+</body>
+
+
+
+</html>

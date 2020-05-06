@@ -1,0 +1,117 @@
+<html>
+
+<head lang='ko'>
+
+<script src='https://code.jquery.com/jquery-3.3.1.js'></script>
+<script src='https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js'></script>
+
+<link rel='stylesheet' href='https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css'>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script>
+$(document).ready(function() {
+    $('#example').DataTable( {
+        "scrollX": true
+    } );
+} );
+</script>
+
+<style>
+div.dataTables_wrapper {
+        width: 90%;
+        margin: 0 auto;
+    }
+
+
+
+</style>
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+  <a class="navbar-brand" href="{% url 'index' %}">나는봄</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarCollapse">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'main' %}">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'initial' %}">초기상담</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'setplan' %}">사례지원계획</a>
+      </li>
+       <li class="nav-item">
+        <a class="nav-link" href="{% url 'danger_cf' %}">위기분류</a>
+      </li>
+      {% comment %} <li class="nav-item">
+        <a class="nav-link" href="{% url 'getplan' %}">사례지원진행</a>
+      </li> {% endcomment %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'userlist' %}">사례지원진행</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'perfor' %}">실적등록</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">통계</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">시각화</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">실적보고</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'toadmin' %}">관리자</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'logout' %}">로그아웃</a>
+      </li>
+      
+    </ul>
+  </div>
+</nav>
+
+<br><br><br><br>
+
+
+<table id="example" class="display nowrap" style="width:100%">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>이름</th>
+            <th>등록날짜</th>
+            <th>나이</th>
+            <th>성별</th>
+            <th>의뢰기관</th>
+            <th>치과진료 계획</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in user_list %}
+        <tr>
+            <th>{{ user.id }}</th>
+            <th><a href="/userlist/{{ user.id }}">{{ user.C_Name }}</a></th>
+            <th>{{ user.REG_Day }}</th>
+            <th>{{ user.age }}</th>
+            <th>{{ user.C_Gender }}</th>
+            <th>{{ user.C_Institute }}</th>
+            <th>{{ user.medical_A1_TF }}</th>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+</div>
+
+</body>
+
+
+
+</html>

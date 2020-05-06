@@ -1,0 +1,142 @@
+{% load static %}
+<head>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" href="{% static 'css/signin.css' %}">
+</head>
+
+<body class='text-center'>
+
+<form class="form-signin" method='POST', action='.'>
+  {% comment %} <img class="mb-4" src="{{ site.baseurl }}/docs/{{ site.docs_version }}/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72"> {% endcomment %}
+  {% csrf_token %}
+  <h1 class="h3 mb-3 font-weight-normal">사례등록</h1><br>
+  {% for field in form %}
+  <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+  <input type="{{ field.field.widget.input_type }}" class="form-control" id="{{ field.id_for_label }}"
+    placeholder="{{ field.label }}" name="{{ field.name }}" />
+  </div>
+
+  {% if field.errors %}
+  <span style="color: red">{{ field.errors }}</span>
+  {% endif %}
+  {% endfor %}
+  <br>
+  <button class="btn btn-lg btn-primary btn-block" type="submit">등록</button>
+  {% comment %} <p class="mt-5 mb-3 text-muted">&copy; 2017-{{ site.time | date: "%Y" }}</p> {% endcomment %}
+</form>
+
+</body>
+
+
+
+
+
+{% comment %} {% extends '_base.html' %}
+{% block contents %}
+<div class="row mt-5">
+  <div class="col-12 text-center">
+    <h1>회원가입</h1>
+  </div>
+</div>
+<div class="row mt-5">
+  <div class="col-12">
+    {{ error }}
+  </div>
+</div>
+<div class="row mt-5">
+  <div class="col-12">
+    <form method="POST" action=".">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="id_username">이름</label>
+        <input type="text" class="form-control" id="id_username"
+          placeholder="이름" name="username" />
+        <label for="id_password">주빈번호</label>
+        <input type="password" class="form-control" id="id_password"
+          placeholder="비밀번호" name="password" />
+        <label for="id_re_password">주민번호 확인</label>
+        <input type="password" class="form-control" id="id_re_password"
+          placeholder="비밀번호 확인" name="re_password" />
+      </div>
+      
+      {% if errors %}
+      <span style="color: red">{{ errors }}</span>
+      {% endif %}
+      <button type="submit" class="btn btn-primary">회원가입</button>
+    </form>
+  </div>
+</div>
+{% endblock %} {% endcomment %}
+
+{% comment %} {% extends '_base.html' %}
+{% block contents %}
+<div class="row mt-5">
+  <div class="col-12 text-center">
+    <h1>회원가입</h1>
+  </div>
+</div>
+<div class="row mt-5">
+  <div class="col-12">
+    {{ error }}
+  </div>
+</div>
+<div class="row mt-5">
+  <div class="col-12">
+    <form method="POST" action=".">
+      {% csrf_token %}
+      {% for field in form %}
+      <div class="form-group">
+        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+        <input type="{{ field.field.widget.input_type }}" class="form-control" id="{{ field.id_for_label }}"
+          placeholder="{{ field.label }}" name="{{ field.name }}" />
+      </div>
+      {% if field.errors %}
+      <span style="color: red">{{ field.errors }}</span>
+      {% endif %}
+      {% endfor %}
+      <button type="submit" class="btn btn-primary">회원가입</button>
+    </form>
+  </div>
+</div>
+{% endblock %} {% endcomment %}
+
+
+{% comment %} {% extends '_base.html' %}
+{% block contents %}
+<div class="row mt-5">
+  <div class="col-12 text-center">
+    <h1>회원가입</h1>
+  </div>
+</div>
+<div class="row mt-5">
+  <div class="col-12">
+    {{ error }}
+  </div>
+</div>
+<div class="row mt-5">
+  <div class="col-12">
+    <form method="POST" action=".">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="id_username">이름</label>
+        <input type="text" class="form-control" id="id_username"
+          placeholder="이름" name="username" />
+        <label for="id_password">비밀번호</label>
+        <input type="password" class="form-control" id="id_password"
+          placeholder="비밀번호" name="password" />
+        <label for="id_re_password">비밀번호 확인</label>
+        <input type="password" class="form-control" id="id_re_password"
+          placeholder="비밀번호 확인" name="re_password" />
+        <label for="id_ex">ex</label>
+        <input type="date" class="form-control" id="id_ex"
+          placeholder="비밀번호 확인" name="ex" />
+      </div>
+      {% if errors %}
+      <span style="color: red">{{ errors }}</span>
+      {% endif %}
+      <button type="submit" class="btn btn-primary">회원가입</button>
+    </form>
+  </div>
+</div>
+{% endblock %} {% endcomment %}
+

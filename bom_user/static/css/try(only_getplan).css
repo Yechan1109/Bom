@@ -1,0 +1,71 @@
+/* 요령 : id나 class 값으로 특정 영역을 선택하고, 상대적인 위치로 찾아들어가 스타일 적용 */
+
+* {  text-decoration: none; margin: 0; box-sizing: border-box; }
+body {text-align: center; background-color: white;}
+
+#main,#right{height: auto; min-height: 700px; width: 45%; min-width: 420px; display: inline-block;
+    margin: 10px ; padding: 15px;
+    box-shadow: 0px 0px 5px gray; text-align: left; background-color: whitesmoke}
+
+#main{margin-left: 3%;}
+#right{margin-right: 3%;}
+
+
+/* 내담자 이름 */
+#right>input{border: none; border-bottom: 2px skyblue solid; background-color: whitesmoke; }
+#right>input:focus {outline:none;}
+
+/* 코드 깨진 글자 */
+/* #right::first-line {color: blueviolet; font-size: large; font-weight: 1000; border-bottom: 3px blueviolet solid; } */
+/* 참고 : CSS 고급 문법 https://code.tutsplus.com/ko/tutorials/the-30-css-selectors-you-must-memorize--net-16048 */
+
+
+
+/* 맨 위 Contaioner 부분 */
+thead>tr>td:nth-child(2){width: 90%; height: auto;}
+
+/* 사례지원 계획 */
+#right>table>tbody>tr:first-child>td{height: 400px;} 
+
+/* 의료, 심리, 사례 */
+#right>table>tbody>tr>td>table>tbody>tr:nth-child(1),
+#right>table>tbody>tr>td>table>tbody>tr:nth-child(8),
+#right>table>tbody>tr>td>table>tbody>tr:nth-child(11)
+/* #right>table>tbody>tr>td>table>tbody>tr:nth-child(10),
+#right>table>tbody>tr>td>table>tbody>tr:nth-child(13),
+#right>table>tbody>tr>td>table>tbody>tr:nth-child(16),
+#right>table>tbody>tr>td>table>tbody>tr:nth-child(19) */
+{background-color: wheat;border-bottom: 5px burlywood solid;border-top: 5px chocolate solid;}
+
+/* 세로 크기 맞춤 */
+#right>table>tbody>tr>td>table>tbody>tr:nth-child(1)>td:first-child{height: 50px;}
+#right>table>tbody>tr>td>table>tbody>tr:nth-child(8)>td:first-child{height: 50px;}
+#right>table>tbody>tr>td>table>tbody>tr:nth-child(11)>td:first-child{height: 50px;}
+/* #right>table>tbody>tr>td>table>tbody>tr:nth-child(10)>td:first-child{height: 50px;}
+#right>table>tbody>tr>td>table>tbody>tr:nth-child(13)>td:first-child{height: 50px;}
+#right>table>tbody>tr>td>table>tbody>tr:nth-child(16)>td:first-child{height: 50px;}
+#right>table>tbody>tr>td>table>tbody>tr:nth-child(19)>td:first-child{height: 50px;} */
+
+/* 의료,심리,사례 하위 테이블 */
+#right>table>tbody>tr>td>table>tbody>tr:nth-child(2),
+#right>table>tbody>tr>td>table>tbody>tr:nth-child(5),
+#right>table>tbody>tr>td>table>tbody>tr:nth-child(8)
+{background-color: bisque;}
+
+
+/* 여기부턴 오른쪽 페이지   */
+
+/* 제출버튼, html에 너비,배경값 있어서 !important 사용함 */
+#right > label{color: blueviolet; font-size: large; font-weight: 1000;}
+/* #right > input[type=submit]{width: 100% !important; background-color: wheat !important; height: 40px;} */
+#right > input:focus{outline: none;}
+
+textarea{width: 100%; min-width: 180px; padding: 5px 7px; }
+textarea:focus{outline: 2px blueviolet solid;}
+
+
+
+@media screen and (max-width: 1000px) {
+    #main,#right{width: 90%; margin: 5px 5%;}
+    
+}

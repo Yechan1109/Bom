@@ -1,0 +1,55 @@
+{% load static %}
+<head>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" href="{% static 'css/cover.css' %}">
+</head>
+
+<body class='text-center'>
+
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+  <header class="masthead mb-auto">
+    <div class="inner">
+      <h3 class="masthead-brand">I'm Bom</h3>
+      <nav class="nav nav-masthead justify-content-center">
+        <a class="nav-link active" href="#">Home</a>
+        <a class="nav-link" href="#">로그인</a>
+      </nav>
+    </div>
+  </header>
+
+<form method='POST'>
+{% csrf_token %}
+  <main role="main" class="inner cover">
+    <h1 class="cover-heading">안녕하세요.<br>서울청소녀시립센터<br><span style='color:yellow; font-weight:bold;'>나는봄</span>입니다.</h1>
+    <p class="lead">서울시는 여자 청소년에게 안전한 환경을 조성하고
+성폭력, 성병, 임신, 성매매등 위험한 환경에 노출된 여자 청소년들의 몸과 마음 회복을 위해 2013년 9월 전국 최초로 십대여성건강센터 나는봄을 설립하였습니다.
+</p>
+
+    <p class="lead" style='text-align:center; width:500px;'>
+    {% for field in form %}
+    <div >
+  <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+  <input type="{{ field.field.widget.input_type }}" class="form-control" id="{{ field.id_for_label }}"
+    placeholder="{{ field.label }}" name="{{ field.name }}" style="text-align:center;" />
+  </div>
+
+  {% if field.errors %}
+  <span style="color: red">{{ field.errors }}</span>
+  {% endif %}
+  {% endfor %}
+      {% comment %} <input type='text' name='counselor_name' style='height:52px; text-align:center;' placeholder='상담자 이름'> <br><br> {% endcomment %}
+      
+      {% comment %} <a href="{% url 'main' %}" class="btn btn-lg btn-secondary">확 인</a> {% endcomment %}
+      <br>
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Sing Up</button>
+    </p>
+  </main>
+</form>
+  <footer class="mastfoot mt-auto">
+    <div class="inner">
+      <p>Cover template for <a href="http://www.imbom.or.kr/">나는봄</a>.</p>
+    </div>
+  </footer>
+</div>
+
+</body>

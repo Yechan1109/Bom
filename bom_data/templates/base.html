@@ -1,0 +1,76 @@
+{% load static %}
+
+<head>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="{% static 'css/navbar-top-fixed.css' %}">
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+  <a class="navbar-brand" href="{% url 'index' %}">나는봄</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarCollapse">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'main' %}">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'initial' %}">초기상담</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'setplan' %}">사례지원계획</a>
+      </li>
+       <li class="nav-item">
+        <a class="nav-link" href="{% url 'danger_cf' %}">위기분류</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'getplan' %}">사례지원진행</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="{% url 'login' %}" tabindex="-1" aria-disabled="true">로그인</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="{% url 'logout' %}" tabindex="-1" aria-disabled="true">로그아웃</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="{% url 'register' %}" tabindex="-1" aria-disabled="true">사례등록</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="{% url 'register' %}" tabindex="-1" aria-disabled="true">실적등록</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'chart' %}">회원정보</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'chart2' %}">회원정보2</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'chart3' %}">회원정보3</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'chart4' %}">회원정보4</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'statistics' %}">통계</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'db' %}">DB</a>
+      </li>
+      
+    </ul>
+    <form class="form-inline mt-2 mt-md-0">
+      <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+
+{% block content %}
+
+{% endblock %}
+
+</body>

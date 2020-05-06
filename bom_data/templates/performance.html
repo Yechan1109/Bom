@@ -1,0 +1,962 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+
+
+    <link rel='stylesheet' href='https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css'>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <script src='https://code.jquery.com/jquery-3.3.1.js'></script>
+<script src='https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js'></script>
+
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    {% comment %} <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script> {% endcomment %}
+
+
+
+    <style type="text/css">
+    body {
+  min-height: 75rem;
+  padding-top: 0rem;
+}
+    
+html {
+  font-size: 14px;
+}
+
+
+.container {
+  max-width: 900px;
+}
+
+
+
+        
+
+#main {
+  background: #f4f7f8;
+	border: 0 none;
+	border-radius: 3px;
+	box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
+	padding: 20px 30px;
+	box-sizing: border-box;
+	width: 700px;
+  height: 1000px;
+	margin-left: 3%;
+  margin-top: 3%;
+  float:left;
+}
+#right {
+  background: #f4f7f8;
+	border: 0 none;
+	border-radius: 3px;
+	box-shadow: 0 0 15px 1px rgba(입력0, 0, 0.4);
+	padding: 20px 30px;
+	box-sizing: border-box;
+	width: 700px;
+    height: 1000px;
+	margin-right: 3%;
+  margin-top: 3%;
+  float: right;
+}
+td {
+font-size:17px;
+font-weight:500;
+}
+
+
+
+/* The popup form - hidden by default */
+.form-popup {
+  display: none;
+  position: fixed;
+
+  left: 23%;
+  top: 25%;
+  border: 3px solid #f1f1f1;
+  z-index: 9;
+}
+
+/* Add styles to the form container */
+.form-container {
+  width: 950px;
+  max-height: 400px;
+  padding: 10px;
+  background-color: white;
+}
+
+/* Full-width input fields */
+.form-container input[type=text], .form-container input[type=password] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: #f1f1f1;
+}
+
+/* When the inputs get focus, do something */
+.form-container input[type=text]:focus, .form-container input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+/* Set a style for the submit/login button */
+.form-container .btn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom:10px;
+  opacity: 0.8;
+}
+
+/* Add a red background color to the cancel button */
+.form-container .cancel {
+  background-color: red;
+}
+
+/* Add some hover effects to buttons */
+.form-container .btn:hover, .open-button:hover {
+  opacity: 1;
+}
+
+input[type=radio] {
+    width:17px;
+    height:17px;
+}
+
+div.dataTables_wrapper {
+  width: 500px;
+  margin: 0 auto;
+  float: left;
+}
+
+    </style>
+    <script type="text/javascript">
+        $(function () {
+            ShowActiveTab($('.btn-group .active input[type=radio]')[0].id);
+            $('.btn-group input[type=radio]').bind('change', function () {
+                $('.forms > div').hide();
+                ShowActiveTab($(this)[0].id);
+            });
+        });
+        function ShowActiveTab(id) {
+            var btnId = id;
+            btnId = btnId.replace(/q/g, '');
+            $('#dv' + btnId).show();
+        }
+    </script>
+   
+</head>
+
+
+<body>
+<form method='POST'>
+
+<div id='main'>
+    {% csrf_token %}
+ 
+<div class="form-inline mt-2 mt-md-0">
+      <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>    
+</div>
+</nav>
+<br><br><br><br>
+<table id="example" class="display nowrap" style="width:100%">
+        <thead>
+            <tr>
+                <th>이름</th>
+                <th>등록일</th>
+                <th>치과 총빈도</th>
+                <th>여성의학과 총빈도</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+        {% for setplan in setplans %}
+            <tr>
+                <td><a href="#">{{setplan.ctname}}</td>
+                <td>{{setplan.setplan_date}}</td>
+                <td>{{setplan.medical_A1_TF}}</td>
+                <td>{{setplan.medical_A2_TF}}</td>
+  
+                
+            </tr>
+            {% endfor %}
+            
+        </tbody>
+    </table>
+
+</div>
+
+
+    <div id="right">
+    {% csrf_token %}
+    <tr>
+ <td>내담자 이름 : <input name='ctname' type='text' required /></td>
+ </tr>
+            <br>
+            <br>
+            
+                <table border='1'>
+    <thead>
+        <tr>
+            <td></td>
+            <td style='font-weight:bold; text-align:center;'>Container</td>
+        </tr>
+    </thead>
+    <tbody>
+        
+        <tr>
+          <td rowspan='2' style='font-weight:bolder; text-align:center; height:150px;'>사업 내용</td>
+        </tr>
+        <tr>
+          <td>
+            <table>
+              <tbody>
+                <tr class="parent" id="perfor-1">
+                  <td style='font-weight:bolder;width:135px;text-align:center;' rowspan="2">의료지원사업</td>
+                </tr>
+                <tr class="child-perfor-1">
+                    <td>
+                        <table>
+                            <tr>
+                                <td onclick="openForm()">야간진료</td>
+                            </tr>
+                            <tr>
+                                <td onclick="openForm2()">찾아가는 의료</td>
+                            </tr>
+                            <tr>
+                                <td onclick="openForm3()">의료상담</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr><td></td></tr>
+                <tr class="parent" id="perfor-2">
+                  <td style='font-weight:bolder;width:135px;text-align:center;' rowspan="2">심리지원사업</td>
+                </tr>
+                <tr class="child-perfor-2">
+                    <td>
+                        <table>
+                            <tr>
+                                <td onclick="openForm6()">수강명령</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+
+                <tr><td></td></tr>
+                <tr class="parent" id="perfor-3">
+                  <td style='font-weight:bolder;width:135px;text-align:center;' rowspan="2">교육지원사업</td>
+                </tr>
+                <tr class="child-perfor-3">
+                    <td>
+                        <table>
+                            <tr>
+                                <td onclick="openForm6()">성교육장이용</td>
+                            </tr>
+                            <tr>
+                                <td onclick="openForm7()">성매매예방교육</td>
+                            </tr>
+                            <tr>
+                                <td onclick="openForm8()">기타교육</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+
+                <tr><td></td></tr>
+                <tr class="parent" id="perfor-4">
+                  <td style='font-weight:bolder;width:135px;text-align:center;' rowspan="2">저소득층청소녀</td>
+                </tr>
+                <tr class="child-perfor-4">
+                    <td>
+                        <table>
+                            <tr>
+                                <td onclick="openForm6()">성건강지원</td>
+                            </tr>
+                            <tr>
+                                <td onclick="openForm7()">생리대지원</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+
+                <tr><td></td></tr>
+                <tr class="parent" id="perfor-5">
+                  <td style='font-weight:bolder;width:135px;text-align:center;' rowspan="2">네트워크</td>
+                </tr>
+                <tr class="child-perfor-5">
+                    <td>
+                        <table>
+                            <tr>
+                                <td onclick="openForm6()">홍보사업</td>
+                            </tr>
+                            <tr>
+                                <td onclick="openForm7()">직원교육</td>
+                            </tr>
+                            <tr>
+                                <td onclick="openForm8()">네트워크</td>
+                            </tr>
+                            <tr>
+                                <td onclick="openForm6()">자기개발</td>
+                            </tr>
+                            <tr>
+                                <td onclick="openForm6()">이용만족도조사</td>
+                            </tr>
+                            <tr>
+                                <td onclick="openForm6()">자원봉사</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+
+
+              </tbody>
+            </table>
+          </td>
+        </tr>
+
+
+
+
+
+
+
+    </tbody>
+</table>
+
+
+
+    <br><br><br>
+    <tr>
+        <td><input type='submit' value='Submit' style='width:630px; background-color:#fcca03;'/></td>
+    </tr>
+    </div>
+        
+<div class="form-popup" id="myForm1">
+  <div action="/action_page.php" class="form-container">
+
+<div class="container">
+  <div class="card-deck mb-3 text-center">
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header">
+        <h4 class="my-0 font-weight-normal">가정의학과</h4>
+      </div>
+      <div class="card-body">
+        <ul class="list-unstyled mt-3 mb-4">
+          <li>날짜 : <input name='' type="date" value='{{bomsetplan.medical_start}}' style="width:90px;"></li>
+          <li>인원 : <input name='' type='text' style="width:90px; height:30px;" placeholder='_____명'></li>
+          <li>     </li>
+          <li>빈도 : <input name='' type='text' style="width:90px; height:30px;" placeholder='_____건'></li>
+        </ul>
+      </div>
+    </div>
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header">
+        <h4 class="my-0 font-weight-normal">여성의학과</h4>
+      </div>
+      <div class="card-body">
+        <ul class="list-unstyled mt-3 mb-4">
+          <li>날짜 : <input name='' type="date" value='{{bomsetplan.medical_start}}' style="width:90px;"></li>
+          <li>인원 : <input name='' type='text' style="width:90px; height:30px;" placeholder='_____명'></li>
+          <li>빈도 : <input name='' type='text' style="width:90px; height:30px;" placeholder='_____건'></li>
+        </ul>
+      </div>
+    </div>
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header">
+        <h4 class="my-0 font-weight-normal">치과</h4>
+      </div>
+      <div class="card-body">
+        <ul class="list-unstyled mt-3 mb-4">
+          <li>날짜 : <input name='' type="date" value='{{bomsetplan.medical_start}}' style="width:90px;"></li>
+          <li>인원 : <input name='' type='text' style="width:90px; height:30px;" placeholder='_____명'></li>
+        </ul>
+      </div>
+    </div>
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header">
+        <h4 class="my-0 font-weight-normal">한방의학과</h4>
+      </div>
+      <div class="card-body">
+        <ul class="list-unstyled mt-3 mb-4">
+          <li>날짜 : <input name='' type="date" value='{{bomsetplan.medical_start}}' style="width:90px;"></li>
+          <li>인원 : <input name='' type='text' style="width:90px; height:30px;" placeholder='_____명'></li>
+        </ul>
+      </div>
+    </div>
+    </div>
+  </div>
+    <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+  </div>
+</div>
+
+
+<div class="form-popup" id="myForm2">
+  <div action="/action_page.php" class="form-container">
+
+<div class="container">
+  <div class="card-deck mb-3 text-center">
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header">
+        <h4 class="my-0 font-weight-normal">의료 아웃리치</h4>
+      </div>
+      <div class="card-body">
+        <ul class="list-unstyled mt-3 mb-4">
+          <li>날짜 : <input name='' type="date" value='{{bomsetplan.medical_start}}' style="width:90px;"></li>
+          <li>인원 : <input name='' type='text' style="width:90px; height:30px;" placeholder='_____명'></li>
+        </ul>
+      </div>
+    </div>
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header">
+        <h4 class="my-0 font-weight-normal">소녀돌봄약국지원</h4>
+      </div>
+      <div class="card-body">
+        <ul class="list-unstyled mt-3 mb-4">
+          <li>날짜 : <input name='' type="date" value='{{bomsetplan.medical_start}}' style="width:90px;"></li>
+          <li>인원 : <input name='' type='text' style="width:90px; height:30px;" placeholder='_____명'></li>
+        </ul>
+      </div>
+    </div>
+    </div>
+  </div>
+    <button type="button" class="btn cancel" onclick="closeForm2()">Close</button>
+  </div>
+</div>
+
+<div class="form-popup" id="myForm3">
+  <div action="/action_page.php" class="form-container">
+
+<div class="container">
+  <div class="card-deck mb-3 text-center">
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header">
+        <h4 class="my-0 font-weight-normal">의료상담(이용자,익명,앱)</h4>
+      </div>
+      <div class="card-body">
+        <ul class="list-unstyled mt-3 mb-4">
+          <li>날짜 : <input name='' type="date" value='{{bomsetplan.medical_start}}' style="width:90px;"></li>
+          <li>인원 : <input name='' type='text' style="width:90px; height:30px;" placeholder='_____명'></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+    <button type="button" class="btn cancel" onclick="closeForm3()">Close</button>
+  </div>
+</div>
+
+<div class="form-popup" id="myForm4">
+  <div action="/action_page.php" class="form-container">
+
+<table class="table table-striped">
+    <thead>
+<tr>
+    <th style="width:150px;">영역</th>
+    <th style="text-align:center;">'현재 내담자의 상태나 과거경험'</th>
+    <th>1</th>
+</tr>
+</thead>
+    <tbody>
+<tr>
+    <td rowspan="5">수강명령</td>
+    <td>입력 날짜 :</td>
+    <td><input type="radio" name="survey4_1" value="1"></td>
+</tr>
+<tr>
+    <td>2. 살고 있는 곳에 도움 받을 가족, 친구가 있다.</td>
+    <td><input type="radio" name="survey4_2" value="1"></td>
+    <td><input type="radio" name="survey4_2" value="2"></td>
+</tr>
+<tr>
+    <td>3. 이용하는 기관이 있다.</td>
+    <td><input type="radio" name="survey4_3" value="1"></td>
+    <td><input type="radio" name="survey4_3" value="2"></td>
+</tr>
+<tr>
+    <td>4. 도움을 주는 선생님(어른)이 있다.</td>
+    <td><input type="radio" name="survey4_4" value="1"></td>
+    <td><input type="radio" name="survey4_4" value="2"></td>
+    <td><input type="radio" name="survey4_4" value="3"></td>
+    <td><input type="radio" name="survey4_4" value="4"></td>
+    <td><input type="radio" name="survey4_4" value="5"></td>
+</tr>
+
+    </tbody>
+</table>
+    <button type="button" class="btn cancel" onclick="closeForm4()">Close</button>
+  </div>
+</div>
+
+<div class="form-popup" id="myForm5-1">
+  <div action="/action_page.php" class="form-container">
+
+<table class="table table-striped">
+    <thead>
+<tr>
+    <th style="width:150px;">영역</th>
+    <th style="text-align:center;">'현재 내담자의 상태나 과거경험'</th>
+    <th>1</th>
+    <th>2</th>
+    <th>3</th>
+    <th>4</th>
+    <th>5</th>
+</tr>
+</thead>
+    <tbody>
+<tr>
+    <td rowspan="5">공통</td>
+    <td>1.생리불순, 생리통, 여성질환 등이 있고 치료를 받을 수 있다.</td>
+    <td><input type="radio" name="survey5_1" value="1"></td>
+    <td><input type="radio" name="survey5_1" value="2"></td>
+    <td><input type="radio" name="survey5_1" value="3"></td>
+    <td><input type="radio" name="survey5_1" value="4"></td>
+    <td><input type="radio" name="survey5_1" value="5"></td>
+</tr>
+<tr>
+    <td>2. 임신걱정을 자주하고, 임신중단, 피임 등에 대한 정보가 있다.</td>
+    <td><input type="radio" name="survey5_2" value="1"></td>
+    <td><input type="radio" name="survey5_2" value="2"></td>
+    <td><input type="radio" name="survey5_2" value="3"></td>
+    <td><input type="radio" name="survey5_2" value="4"></td>
+    <td><input type="radio" name="survey5_2" value="5"></td>
+</tr>
+<tr>
+    <td>3. 위생용품의 사용법을 알고, 주병의 도움도 있다.</td>
+    <td><input type="radio" name="survey5_3" value="1"></td>
+    <td><input type="radio" name="survey5_3" value="2"></td>
+    <td><input type="radio" name="survey5_3" value="3"></td>
+    <td><input type="radio" name="survey5_3" value="4"></td>
+    <td><input type="radio" name="survey5_3" value="5"></td>
+</tr>
+
+    </tbody>
+</table>
+    <button type="button" class="btn cancel" onclick="closeForm5_1()">Close</button>
+  </div>
+</div>
+
+
+<div class="form-popup" id="myForm5-2">
+  <div action="/action_page.php" class="form-container">
+
+<table class="table table-striped">
+    <thead>
+<tr>
+    <th style="width:150px;">영역</th>
+    <th style="text-align:center;">'현재 내담자의 상태나 과거경험'</th>
+    <th>1</th>
+    <th>2</th>
+    <th>3</th>
+    <th>4</th>
+    <th>5</th>
+</tr>
+</thead>
+    <tbody>
+<tr>
+    <td rowspan="5">성관계</td>
+    <td>1.조건만남을 하고 있다.</td>
+    <td><input type="radio" name="survey6_1" value="1"></td>
+    <td><input type="radio" name="survey6_1" value="2"></td>
+    <td><input type="radio" name="survey6_1" value="3"></td>
+    <td><input type="radio" name="survey6_1" value="4"></td>
+    <td><input type="radio" name="survey6_1" value="5"></td>
+</tr>
+<tr>
+    <td>2. 불평등한 성관계를 하고 있다.</td>
+    <td><input type="radio" name="survey6_2" value="1"></td>
+    <td><input type="radio" name="survey6_2" value="2"></td>
+    <td><input type="radio" name="survey6_2" value="3"></td>
+    <td><input type="radio" name="survey6_2" value="4"></td>
+    <td><input type="radio" name="survey6_2" value="5"></td>
+</tr>
+<tr>
+    <td>3. 술, 약물을 섭취하고 성관계를 하는 경우가 많다.</td>
+    <td><input type="radio" name="survey6_3" value="1"></td>
+    <td><input type="radio" name="survey6_3" value="2"></td>
+    <td><input type="radio" name="survey6_3" value="3"></td>
+    <td><input type="radio" name="survey6_3" value="4"></td>
+    <td><input type="radio" name="survey6_3" value="5"></td>
+</tr>
+
+    </tbody>
+</table>
+    <button type="button" class="btn cancel" onclick="closeForm5_2()">Close</button>
+  </div>
+</div>
+
+<div class="form-popup" id="myForm6">
+  <div action="/action_page.php" class="form-container">
+
+<table class="table table-striped">
+    
+    <tbody>
+<tr>
+    <td rowspan="5"style='text-align:center; vertical-align: middle;'>수강명령</td>
+    <td style='text-align:center;'>날짜 : <input name='' type="date" value='{{bomsetplan.medical_start}}' style="width:130px;"></td>
+</tr>
+<tr>
+    <td style='text-align:center;'>인원 : <input name='' type='text' style="width:130px; height:30px;" placeholder='________명'></td>
+</tr>
+<tr>
+    <td style='text-align:center;'>빈도 : <input name='' type='text' style="width:130px; height:30px;" placeholder='________명'></td>
+</tr>
+    </tbody>
+</table>
+    <button type="button" class="btn cancel" onclick="closeForm6()">Close</button>
+  </div>
+</div>
+
+<div class="form-popup" id="myForm7">
+  <div action="/action_page.php" class="form-container">
+
+<table class="table table-striped">
+    <thead>
+<tr>
+    <th style="width:150px;">영역</th>
+    <th style="text-align:center;">'현재 내담자의 상태나 과거경험'</th>
+    <th>1</th>
+    <th>2</th>
+    <th>3</th>
+    <th>4</th>
+    <th>5</th>
+</tr>
+</thead>
+    <tbody>
+<tr>
+    <td rowspan="5">학업중단</td>
+    <td>1. 학교를 그만 두었고 학업을 계속 할 계획이 없는 상태이다.</td>
+    <td><input type="radio" name="survey8_1" value="1"></td>
+    <td><input type="radio" name="survey8_1" value="2"></td>
+    <td><input type="radio" name="survey8_1" value="3"></td>
+    <td><input type="radio" name="survey8_1" value="4"></td>
+    <td><input type="radio" name="survey8_1" value="5"></td>
+</tr>
+<tr>
+    <td>2. 학교를 다니고 있지만 잘 나가지 않는다 .</td>
+    <td><input type="radio" name="survey8_2" value="1"></td>
+    <td><input type="radio" name="survey8_2" value="2"></td>
+    <td><input type="radio" name="survey8_2" value="3"></td>
+    <td><input type="radio" name="survey8_2" value="4"></td>
+    <td><input type="radio" name="survey8_2" value="5"></td>
+</tr>
+<tr>
+    <td>3. 학교를 그만 둘 예정이다.</td>
+    <td><input type="radio" name="survey8_3" value="1"></td>
+    <td><input type="radio" name="survey8_3" value="2"></td>
+    <td><input type="radio" name="survey8_3" value="3"></td>
+    <td><input type="radio" name="survey8_3" value="4"></td>
+    <td><input type="radio" name="survey8_3" value="5"></td>
+</tr>
+
+    </tbody>
+</table>
+    <button type="button" class="btn cancel" onclick="closeForm7()">Close</button>
+  </div>
+</div>
+
+<div class="form-popup" id="myForm8">
+  <div action="/action_page.php" class="form-container">
+
+<table class="table table-striped">
+    <thead>
+<tr>
+    <th style="width:150px;">영역</th>
+    <th style="text-align:center;">'현재 내담자의 상태나 과거경험'</th>
+    <th>1</th>
+    <th>2</th>
+    <th>3</th>
+    <th>4</th>
+    <th>5</th>
+</tr>
+</thead>
+    <tbody>
+<tr>
+    <td rowspan="5">폭력피해</td>
+    <td>1. 친구 또는 선후배, 가족에게 폭행을 당했거나 당하고 있다.</td>
+    <td><input type="radio" name="survey9_1" value="1"></td>
+    <td><input type="radio" name="survey9_1" value="2"></td>
+    <td><input type="radio" name="survey9_1" value="3"></td>
+    <td><input type="radio" name="survey9_1" value="4"></td>
+    <td><input type="radio" name="survey9_1" value="5"></td>
+</tr>
+<tr>
+    <td>2. 친구 또는 선후배에게 따돌림이나 괴롭힘을 당했거나 당하고 있다.</td>
+    <td><input type="radio" name="survey9_2" value="1"></td>
+    <td><input type="radio" name="survey9_2" value="2"></td>
+    <td><input type="radio" name="survey9_2" value="3"></td>
+    <td><input type="radio" name="survey9_2" value="4"></td>
+    <td><input type="radio" name="survey9_2" value="5"></td>
+</tr>
+<tr>
+    <td>3. SNS상의 성폭력을 당한 적이 있거나 당하고 있다.</td>
+    <td><input type="radio" name="survey9_3" value="1"></td>
+    <td><input type="radio" name="survey9_3" value="2"></td>
+    <td><input type="radio" name="survey9_3" value="3"></td>
+    <td><input type="radio" name="survey9_3" value="4"></td>
+    <td><input type="radio" name="survey9_3" value="5"></td>
+</tr>
+
+    </tbody>
+</table>
+    <button type="button" class="btn cancel" onclick="closeForm8()">Close</button>
+  </div>
+</div>
+
+<div class="form-popup" id="myForm9">
+  <div action="/action_page.php" class="form-container">
+
+<table class="table table-striped">
+    <thead>
+<tr>
+    <th style="width:150px;">영역</th>
+    <th style="text-align:center;">'현재 내담자의 상태나 과거경험'</th>
+    <th>1</th>
+    <th>2</th>
+    <th>3</th>
+    <th>4</th>
+    <th>5</th>
+</tr>
+</thead>
+    <tbody>
+<tr>
+    <td rowspan="5">폭력가해</td>
+    <td>1. 친구 또는 선후배, 가족을 폭행 했거나 지금도 하고 있다.</td>
+    <td><input type="radio" name="survey10_1" value="1"></td>
+    <td><input type="radio" name="survey10_1" value="2"></td>
+    <td><input type="radio" name="survey10_1" value="3"></td>
+    <td><input type="radio" name="survey10_1" value="4"></td>
+    <td><input type="radio" name="survey10_1" value="5"></td>
+</tr>
+<tr>
+    <td>2. 친구 또는 선후배를 따돌림, 괴롭혔거나 지금도 하고 있다.</td>
+    <td><input type="radio" name="survey10_2" value="1"></td>
+    <td><input type="radio" name="survey10_2" value="2"></td>
+    <td><input type="radio" name="survey10_2" value="3"></td>
+    <td><input type="radio" name="survey10_2" value="4"></td>
+    <td><input type="radio" name="survey10_2" value="5"></td>
+</tr>
+<tr>
+    <td>3. SNS상의 성폭력에 가담 한 적이 있거나 지금도 하고 있다.</td>
+    <td><input type="radio" name="survey10_3" value="1"></td>
+    <td><input type="radio" name="survey10_3" value="2"></td>
+    <td><input type="radio" name="survey10_3" value="3"></td>
+    <td><input type="radio" name="survey10_3" value="4"></td>
+    <td><input type="radio" name="survey10_3" value="5"></td>
+</tr>
+
+    </tbody>
+</table>
+    <button type="button" class="btn cancel" onclick="closeForm9()">Close</button>
+  </div>
+</div>
+
+<div class="form-popup" id="myForm10">
+  <div action="/action_page.php" class="form-container">
+
+<table class="table table-striped">
+    <thead>
+<tr>
+    <th style="width:150px;">영역</th>
+    <th style="text-align:center;">'현재 내담자의 상태나 과거경험'</th>
+    <th>1</th>
+    <th>2</th>
+    <th>3</th>
+    <th>4</th>
+    <th>5</th>
+</tr>
+</thead>
+    <tbody>
+<tr>
+    <td rowspan="5">정신건강<br>(음주,약물,자살,자해)</td>
+    <td>1. 우울하거나 스트레스가 심하다.</td>
+    <td><input type="radio" name="survey11_1" value="1"></td>
+    <td><input type="radio" name="survey11_1" value="2"></td>
+    <td><input type="radio" name="survey11_1" value="3"></td>
+    <td><input type="radio" name="survey11_1" value="4"></td>
+    <td><input type="radio" name="survey11_1" value="5"></td>
+</tr>
+<tr>
+    <td>2. 술을 자주 마시고 기억이 잘 나지 않는다.</td>
+    <td><input type="radio" name="survey11_2" value="1"></td>
+    <td><input type="radio" name="survey11_2" value="2"></td>
+    <td><input type="radio" name="survey11_2" value="3"></td>
+    <td><input type="radio" name="survey11_2" value="4"></td>
+    <td><input type="radio" name="survey11_2" value="5"></td>
+</tr>
+<tr>
+    <td>3. 현재 자살/자해 생각이 있거나 시도 한 적이 있다.</td>
+    <td><input type="radio" name="survey11_3" value="1"></td>
+    <td><input type="radio" name="survey11_3" value="2"></td>
+    <td><input type="radio" name="survey11_3" value="3"></td>
+    <td><input type="radio" name="survey11_3" value="4"></td>
+    <td><input type="radio" name="survey11_3" value="5"></td>
+</tr>
+<tr>
+    <td>4. 끼니를 자주 걸러 짜증나고 힘들다.</td>
+    <td><input type="radio" name="survey11_4" value="1"></td>
+    <td><input type="radio" name="survey11_4" value="2"></td>
+    <td><input type="radio" name="survey11_4" value="3"></td>
+    <td><input type="radio" name="survey11_4" value="4"></td>
+    <td><input type="radio" name="survey11_4" value="5"></td>
+</tr>
+
+    </tbody>
+</table>
+    <button type="button" class="btn cancel" onclick="closeForm10()">Close</button>
+  </div>
+</div>
+
+<script>
+$('tr.parent')
+    .css("cursor", "pointer")
+    .attr("title", "Click to expand/collapse")
+    .click(function () {
+    $(this).siblings('.child-' + this.id).toggle();
+});
+$('tr[class*=child-]').hide().children('td');
+
+
+$(function () {
+    ShowActiveTab($('.btn-group .active input[type=radio]')[0].id);
+    $('.btn-group input[type=radio]').bind('change', function () {
+        $('.forms > div').hide();
+        ShowActiveTab($(this)[0].id);
+    });
+});
+function ShowActiveTab(id) {
+    var btnId = id;
+    btnId = btnId.replace(/q/g, '');
+    $('#dv' + btnId).show();
+}
+
+
+{% comment %} for i in range(1,10) {
+    function openForm[i]() {
+        document.getElementById("myForm[i]").style.display = 'block';
+    }
+}
+
+for i in range(1,10) {
+    function closeForm[i]() {
+        document.getElementById("myForm[i]").style.display = 'none';
+    }
+} {% endcomment %}
+
+function openForm() {
+  document.getElementById("myForm1").style.display = "block";
+}
+
+function closeForm() {
+  document.getElementById("myForm1").style.display = "none";
+}
+
+function openForm2() {
+  document.getElementById("myForm2").style.display = "block";
+}
+
+function closeForm2() {
+  document.getElementById("myForm2").style.display = "none";
+}
+
+function openForm3() {
+  document.getElementById("myForm3").style.display = "block";
+}
+
+function closeForm3() {
+  document.getElementById("myForm3").style.display = "none";
+}
+
+function openForm4() {
+  document.getElementById("myForm4").style.display = "block";
+}
+
+function closeForm4() {
+  document.getElementById("myForm4").style.display = "none";
+}
+
+
+function openForm5_1() {
+  document.getElementById("myForm5-1").style.display = "block";
+}
+
+function closeForm5_1() {
+  document.getElementById("myForm5-1").style.display = "none";
+}
+
+function openForm5_2() {
+  document.getElementById("myForm5-2").style.display = "block";
+}
+
+function closeForm5_2() {
+  document.getElementById("myForm5-2").style.display = "none";
+}
+
+function openForm6() {
+  document.getElementById("myForm6").style.display = "block";
+}
+
+function closeForm6() {
+  document.getElementById("myForm6").style.display = "none";
+}
+
+function openForm7() {
+  document.getElementById("myForm7").style.display = "block";
+}
+
+function closeForm7() {
+  document.getElementById("myForm7").style.display = "none";
+}
+
+function openForm8() {
+  document.getElementById("myForm8").style.display = "block";
+}
+
+function closeForm8() {
+  document.getElementById("myForm8").style.display = "none";
+}
+
+function openForm9() {
+  document.getElementById("myForm9").style.display = "block";
+}
+
+function closeForm9() {
+  document.getElementById("myForm9").style.display = "none";
+}
+
+function openForm10() {
+  document.getElementById("myForm10").style.display = "block";
+}
+
+function closeForm10() {
+  document.getElementById("myForm10").style.display = "none";
+}
+</script>
+
+</div>
+
+</body>
+
+
+
+</html>
+{% endblock %}

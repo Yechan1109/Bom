@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<main role="main" class="container">
+  <div class="jumbotron">
+    <h1>{{ counselor_name }}님 로그인</h1>
+    <br>
+    <p class="lead">-> 위기분류 총 회 중 0회 진행 중.....</p>
+    <p class="lead">-> 사례지원 총 회 중 0회 진행 중.....</p>
+    <a class="btn btn-lg btn-primary" href="{{ site.baseurl }}/docs/{{ site.docs_version }}/components/navbar/" role="button">페이지 이동 &raquo;</a>
+  </div>
+</main>
+
+{% endblock %}

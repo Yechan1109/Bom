@@ -1,0 +1,430 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% comment %} <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"> {% endcomment %}
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    {% comment %} <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script> {% endcomment %}
+
+
+
+    <style type="text/css">
+    body {
+  min-height: 75rem;
+  padding-top: 0rem;
+}
+    
+        
+
+        
+
+#main {
+  background: #f4f7f8;
+	border: 0 none;
+	border-radius: 3px;
+	box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
+	padding: 20px 30px;
+	box-sizing: border-box;
+	width: 700px;
+  height: 1000px;
+	margin-left: 3%;
+  margin-top: 3%;
+  float:left;
+}
+#right {
+  background: #f4f7f8;
+	border: 0 none;
+	border-radius: 3px;
+	box-shadow: 0 0 15px 1px rgba(입력0, 0, 0.4);
+	padding: 20px 30px;
+	box-sizing: border-box;
+	width: 700px;
+    height: 1000px;
+	margin-right: 3%;
+  margin-top: 3%;
+  float: right;
+}
+td {
+font-size:19px;
+font-weight:450;
+
+}
+#main input[type=date] {
+    width:180px;
+}
+
+select, option {
+    width:180px;
+}
+
+textarea {
+    width:180px;
+    
+}
+    </style>
+   
+</head>
+
+
+<body>
+<br><br><br>
+<form method='POST'>
+    {% csrf_token %}
+
+<div id='main'>
+<tr><h3 style='text-align:center;'>기본인적사항</h3></tr>
+ <tr class='parent' id='c-1'>
+                        <td rowspan="2"></td>
+                    </tr>
+                    <tr class='child-c-1'>
+                        <tr>
+                            <table>
+                                <tr>
+                                    <td for='id_RED_Day'>1. 등록일 :</td>
+                                    <tr></tr>
+                                    <td>
+                                        <input name='REG_Day' id='id_REG_Day' type='date' value='{{bomuser.REG_Day}}'>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td for='id_F_Coun'>2. 최초상담자 :</td><tr></tr>
+                                    <td>
+                                        <select name='F_Coun' id='id_F_Coun'>
+                                            <option>-------------------</option>
+                                            <option name='F_Coun' id='F_Coun_1' value='이성영'>이성영</option>
+                                            <option name='F_Coun' id='F_Coun_2' value='정현재'>정현재</option>
+                                            <option name='F_Coun' id='F_Coun_3' value='김현정'>김현정</option>
+                                            <option name='F_Coun' id='F_Coun_4' value='문보라'>문보라</option>
+                                            <option name='F_Coun' id='F_Coun_5' value='박지숙'>박지숙</option>
+                                            <option name='F_Coun' id='F_Coun_6' value='김수미'>김수미</option>
+                                            <option name='F_Coun' id='F_Coun_7' value='강주연'>강주연</option>
+                                            <option name='F_Coun' id='F_Coun_8' value='노미나'>노미나</option>
+                                            <option name='F_Coun' id='F_Coun_9' value='곽은영'>곽은영</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                
+
+                                <tr>
+                                    <td for='id_C_Name'>3. 성명 :</td><tr></tr>
+                                    <td>
+                                        <textarea name='C_Name' id='id_C_Name' cols="14" rows="1" required /></textarea>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td for='id_C_Gender'>4. 성별 :</td><tr></tr>
+                                    <td>
+                                        <input name='C_Gender' id='C_Gender_M' type='radio' value="남자"><span style='font-size:16px;'>남자</span>
+                                        <input name='C_Gender' id='C_Gender_F' type='radio' value="여자"><span style='font-size:16px;'>여자</span>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td for='id_C_Jumin'>5. 주민번호앞자리 :</td><tr></tr>
+                                    <td>
+                                        <textarea name='C_Jumin' id='id_C_Jumin' cols="14" rows="1"></textarea>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td for='id_C_Kakaoid'>6. 카톡아이디 :</td><tr></tr>
+                                    <td>
+                                        <textarea name='C_Kakaoid' id='id_C_Kakaoid' cols="14" rows="1"></textarea>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td for='id_C_Tel'>7. 전화번호 :</td><tr></tr>
+                                    <td>
+                                        <textarea name='C_Tel' id='id_C_Tel' cols="14" rows="1"></textarea>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td for='id_C_CN'>8. 긴급연락처 :</td><tr></tr>
+                                    <td>
+                                        <textarea name='C_CN' id='id_C_CN' cols="14" rows="1"></textarea>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td for='id_C_Address1'>9. 주소 :</td><tr></tr>
+                                </tr>
+                                <tr>
+                                    <td colspan="2"><textarea name='C_Address1' id='id_C_Address1' cols=20 rows=2 style='width:265px;'></textarea></td>
+                                </tr>
+                                <tr>
+                                    <td for='id_C_Address2'>10. 현주거지 :</td><tr></tr>
+                                </tr>
+                                <tr>
+                                    <td colspan="2"><textarea name='C_Address2' id='id_C_Address2' cols=20 rows=2 style='width:265px;'></textarea></td>
+                                </tr>
+                                <tr class='parent' id='1'>
+                                    <td>11. 주거형태 :</td>
+                                </tr>
+                                <tr class='child-1'>
+                                    <td>
+                                        <table>
+                                            <tboody for='id_C_Residential'>
+                                                <tr>
+                                                    <td><input type='radio' name="C_Residential" id='id_C_Residential' value="자가">자가</td>
+                                                    <td><input type='radio' name="C_Residential" id='id_C_Residential' value="전세">전세</td>
+                                                    <td><input type='radio' name="C_Residential" id='id_C_Residential' value="원룸(월세)">원룸(월세)</td>
+                                                    <td><input type='radio' name="C_Residential" id='id_C_Residential' value="고시텔(월세)">고시텔(월세)</td>
+                                                    <td><input type='radio' name="C_Residential" id='id_C_Residential' value="기타">기타</td>
+                                                    <td><input type='text' name='C_Residential_text' style='width:130px;'>
+                                                </tr>
+                                            </tboody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr class='parent' id='4'>
+                                    <td>12. 상담이력 :</td>
+                                </tr>
+                                <tr class='child-4'>
+                                    <td colspan='4'>
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <td><input type='radio' name='C_History' value='없음'>없음</td>
+                                                    <td><input type='radio' name='C_History' value='있음'>있음 </td>
+                                                    <td>
+                                                        <select name='C_History_select' style='width:130px;'>
+                                                            <option>--상담유형--</option>
+                                                            <option name='C_History_select' value='전화 및 SNS'>전화 및 SNS</option>
+                                                            <option name='C_History_select' value='대면'>대면</option>
+                                                            <option name='C_History_select' value='기타'>기타</option>
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr class='parent' id='5'>
+                                    <td>13. 의뢰경로 :</td>
+                                </tr>
+                                <tr class='child-5'>
+                                    <td colspan='4'>
+                                        <table>
+                                            <tbody>
+                                                <td>
+                                                    <input type='radio' name="C_Route" value="선생님">선생님</td>
+                                                <td>
+                                                    <input type='radio' name="C_Route" value="기관소개">기관소개</td>
+                                                <td>
+                                                    <input type='radio' name="C_Route" value="기타">기타
+                                                    <input type='text' name='C_Route_text' style='width:100px;' placeholder="내용 입력">
+                                                </td>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+</tr>
+</div>
+
+
+    <div id="right">
+    <tr><h3 style='text-align:center;'>추가인적사항</h3></tr>
+    
+        
+            
+                    <tr class='child-c-2'>
+                        <td>
+                            <table>
+                                
+
+                                
+
+                                <tr class='parent' id='6'>
+                                    <td>14. 의뢰기관 :</td>
+                                </tr>
+                                <tr class='child-6'>
+                                    <td>
+                                        <table >
+                                            <td for='id_C_Institute'>
+                                                <textarea name='C_Institute' id='id_C_Institute' cols="20" rows="2" style='width:300px;'></textarea>
+                                            </td>
+                                        </table>
+                                    </td>
+                                </tr>
+
+                                <tr class='parent' id='7'>
+                                    <td>15. 의뢰인 :</td>
+                                </tr>
+                                <tr class='child-7'>
+                                    <td>
+                                        <table>
+                                            <td>
+                                                <textarea cols="14" rows="1" name='C_Incharge_name' placeholder='----의뢰인 성명-----'></textarea>
+                                                <br>
+                                                <textarea cols="14" rows="1" name='C_Incharge_tel' placeholder='--------연락처-------'></textarea>
+                                            </td>
+                                        </table>
+                                    </td>
+                                </tr>
+
+                                <tr class='parent' id='8'>
+                                    <td>16. 타기관 이용경험(확인) :</td>
+                                </tr>
+                                <tr class='child-8'>
+                                    <td>
+                                        <table>
+                                            <td>
+                                                <textarea cols=30 rows=4 name='C_Otherhistory' style='width:400px;'></textarea>
+                                            </td>
+                                        </table>
+                                    </td>
+                                </tr>
+
+                                <tr class='parent' id='9'>
+                                    <td>17. 장애여부 :</td>
+                                </tr>
+                                <tr class='child-9'>
+                                    <td colspan='4'>
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                    <input type='radio' name='C_Disorder' value="없음">없음
+                                                    <input type='radio' name='C_Disorder' value="있음">있음
+                                                    <input type='text' name='C_Disorder_text' style='width:100px;' placeholder="">
+                                                </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+
+                                <tr class='parent' id='10'>
+                                    <td>18. 보호구분 :</td>
+                                </tr>
+                                <tr class='child-10'>
+                                    <td>
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <td><input type='radio' name="C_Ssgrade" value="기초수급">기초수급</td>
+                                                    <td><input type='radio' name="C_Ssgrade" value="차상위">차상위</td>                                               
+                                                    <td><input type='radio' name="C_Ssgrade" value="의료급여">의료급여</td>
+                                                    <td><input type='radio' name="C_Ssgrade" value="기타">기타
+                                                    <input type='text' name="C_Ssgrade_text" style='width:100px;'></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+
+                                <tr class='parent' id='11'>
+                                    <td>19. 가족형태 :</td>
+                                </tr>
+                                <tr class='child-11'>
+                                    <td>
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <td><input type='radio' name="C_Family" value="조손가정">조손가정</td>
+                                                    <td><input type='radio' name="C_Family" value="한부모">한부모</td>
+                                                    <td><input type='radio' name="C_Family" value="부모">부모</td>
+                                                    <td><input type='radio' name="C_Family" value="독립">독립</td>
+                                                    <td><input type='radio' name="C_Family" value="동거">동거</td>
+                                                    <td><input type='radio' name="C_Family" value="기타">기타
+                                                    <input type='text' name='C_Family_text' style='width:120px;'></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+
+                                <tr class='parent' id='12'>
+                                    <td>20. 직업 :</td>
+                                </tr>
+                                <tr class='child-12'>
+                                    <td colspan='4'>
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <td><input type='radio' name='C_Job' value='없음1'>없음</td>
+                                                    <td><input type='radio' name='C_Job' value='있음'>있음</td>
+                                                    <td><input type='text' name='C_Job_text' style='width:100px;' placeholder='직업 이름'></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+
+                                <tr class='parent' id='13'>
+                                    <td>21. 경제상황 :</td>
+                                </tr>
+                                <tr class='child-13'>
+                                    <td>
+                                        <table>
+                                            <tr>
+                                                <td>- 아르바이트</td>
+                                                <td> : <input type='text' name='C_Ecostatus1' style='width:30px;'> 만원</td>
+                                            </tr>
+                                            <tr>
+                                                <td>- 취업</td>
+                                                <td> : <input type='text' name='C_Ecostatus2' style='width:30px;'> 만원</td>
+                                            </tr>
+                                            <tr>
+                                                <td>- 부모님지원</td>
+                                                <td> : <input type='text' name='C_Ecostatus3' style='width:30px;'> 만원</td>
+                                            </tr>
+                                            <tr>
+                                                <td>- 기타</td>
+                                                <td> : <input type='text' name='C_Ecostatus4' style='width:30px;'> 만원</td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+
+                                <tr class='parent' id='14'>
+                                    <td>22. 최종학력 :</td>
+                                </tr>
+                                <tr class='child-14'>
+                                    <td>
+                                        <table>
+                                            <td>
+                                                <input type='radio' name="C_Education" value="초등">초등</td>
+                                            <td>
+                                                <input type='radio' name="C_Education" value="중등">중등</td>
+                                            <td>
+                                                <input type='radio' name="C_Education" value="고등">고등</td>
+                                            <td>
+                                                <input type='radio' name="C_Education" value="기타">기타
+                                                <input type='text' name='C_Education_text' style='width:100px;'>
+                                            </td>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <br><br>
+                                <tr></tr>
+                                <tr>
+                                    <td><input type='submit' value='Submit' style='width:630px; height:40px; background-color:#fcca03;'/></td>
+                                </tr>
+
+                            </table>
+                        </td>
+                    </tr>
+        
+    </div>
+
+</form>
+
+</body>
+
+</html>
+{% endblock %}

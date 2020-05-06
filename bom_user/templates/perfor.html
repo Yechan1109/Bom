@@ -1,0 +1,187 @@
+<html>
+
+<head lang='ko'>
+
+<script src='https://code.jquery.com/jquery-3.3.1.js'></script>
+<script src='https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js'></script>
+
+<link rel='stylesheet' href='https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css'>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script>
+$(document).ready(function() {
+    $('#example').DataTable( {
+        "scrollX": true
+    } );
+} );
+</script>
+
+<style>
+div.dataTables_wrapper {
+        width: 800px;
+        float: left;
+        margin: 30px 50px;
+    }
+div.right {
+  {% comment %} width: 500px;
+  float: right;
+  margin: 30px; 50px; {% endcomment %}
+  background: #f4f7f8;
+	border: 0 none;
+	border-radius: 3px;
+	box-shadow: 0 0 15px 1px rgba(입력0, 0, 0.4);
+	padding: 20px 30px;
+	box-sizing: border-box;
+	width: 600px;
+  height: 450px;
+	margin-right: 3%;
+  margin-top: 3%;
+  float: right;
+}
+
+
+</style>
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+  <a class="navbar-brand" href="{% url 'index' %}">나는봄</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarCollapse">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'main' %}">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'initial' %}">초기상담</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'setplan' %}">사례지원계획</a>
+      </li>
+       <li class="nav-item">
+        <a class="nav-link" href="{% url 'danger_cf' %}">위기분류</a>
+      </li>
+      {% comment %} <li class="nav-item">
+        <a class="nav-link" href="{% url 'getplan' %}">사례지원진행</a>
+      </li> {% endcomment %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'userlist' %}">사례지원진행</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'perfor' %}">실적등록</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">통계</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">시각화</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">실적보고</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'toadmin' %}">관리자</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'logout' %}">로그아웃</a>
+      </li>
+      
+      
+    </ul>
+  </div>
+</nav>
+
+<form method='POST'>
+{% csrf_token %}
+    
+
+<br><br><br><br>
+<div>
+<table id="example" class="display nowrap" style="width:100%">
+        <thead>
+            <tr>
+                <th>진행 날짜</th>
+                <th>인원</th>
+                <th>건</th>
+                <th>프로그램</th>
+            </tr>
+        </thead>
+        <tbody>
+        
+        {% for performance in performances %}
+            <tr>
+                <td>{{performance.perfor_date}}</td>
+                <td>{{performance.perfor_people}}</td>
+                <td>1</td>
+                <td>{{performance.perfor_program}}</td>
+            </tr>
+            {% endfor %}
+            
+            
+        </tbody>
+    </table>
+    </div>
+
+<div class='right'>
+  {% comment %} {% for field in form %}
+  <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+  <input type="{{ field.field.widget.input_type }}" class="form-control" id="{{ field.id_for_label }}"
+      placeholder="{{ field.label }}" name="{{ field.name }}" />
+  {% if field.errors %}
+  <span style="color: red">{{ field.errors }}</span>
+  {% endif %}
+  {% endfor %} {% endcomment %}
+
+    {% comment %} {{ form.as_p }} {% endcomment %}
+  <br><br>
+<p><label for="id_perfor_program">프로그램명:</label> <select name="perfor_program" id="id_perfor_program">
+  <optgroup label="의료지원사업">
+  <option name='perfor_program' id='perfor_program_1' value="의료 아웃리치">의료 아웃리치</option>
+  <option name='perfor_program' id='perfor_program_2' value="소녀돌봄약국지원">소녀돌봄약국지원</option>
+  </optgroup>
+  <optgroup label="교육지원사업">
+  <option name='perfor_program' id='perfor_program_3' value="성교육장이용">성교육장이용</option>
+  <option name='perfor_program' id='perfor_program_4' value="찾아가는 성매매예방교육연극">찾아가는 성매매예방교육연극</option>
+  <option name='perfor_program' id='perfor_program_5' value="종사자교육">종사자교육</option>
+  </optgroup>
+  <optgroup label="성건강지원사업">
+  <option name='perfor_program' id='perfor_program_6' value="성건강수첩">성건강수첩</option>
+  <option name='perfor_program' id='perfor_program_7' value="찾아가는 초등성건강교육">찾아가는 초등성건강교육</option>
+  <option name='perfor_program' id='perfor_program_8' value="소그룹 성건강교육">소그룹 성건강교육</option>
+  <option name='perfor_program' id='perfor_program_9' value="생리대 배분">생리대 배분</option>
+  <option name='perfor_program' id='perfor_program_10' value="생리대 후원 확보">생리대 후원 확보</option>
+  </optgroup>
+  <optgroup label="네트워크">
+  <option name='perfor_program' id='perfor_program_11' value="거리, 방문홍보">온라인 홍보</option>
+  <option name='perfor_program' id='perfor_program_12' value="우편홍보">우편홍보</option>
+  <option name='perfor_program' id='perfor_program_13' value="내외부 직원교육">내외부 직원교육</option>
+  <option name='perfor_program' id='perfor_program_14' value="네트워크 및 사업협력">네트워크 및 사업협력</option>
+  <option name='perfor_program' id='perfor_program_15' value="대학생 타기관 교육, 네트워킹">대학생 타기관 교육, 네트워킹</option>
+  <option name='perfor_program' id='perfor_program_16' value="연합사례회의, 지원협력">연합사례회의, 지원협력</option>
+  <option name='perfor_program' id='perfor_program_17' value="후원처 자원발굴, 관리">후원처 자원발굴, 관리</option>
+  <option name='perfor_program' id='perfor_program_18' value="이용자 만족도조사, 질적인터뷰 등">이용자 만족도조사, 질적인터뷰 등</option>
+  <option name='perfor_program' id='perfor_program_19' value="자원봉사활동">자원봉사활동</option>
+  </optgroup>
+</select></p>
+<br>
+<p><label for="id_perfor_date">진행 날짜:</label> <input name="perfor_date" id="id_perfor_date" required="" type="date"></p>
+<br>
+<p><label for="id_perfor_people">인 원 :</label> <input name="perfor_people" id="id_perfor_people" required="" type="number"></p>
+<br>
+<p><label for="id_perfor_count">건 수 :</label> <input name="perfor_count" id="id_perfor_count" required="" type="number"></p>
+
+
+
+<br><br><br><br><br>
+   <button class="btn btn-lg btn-primary btn-block" type="submit">확 인</button>
+</div>
+
+</form>
+</body>
+
+
+
+</html>
